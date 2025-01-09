@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+
+  client:
+    name: Client CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js for App
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies for App
+        run: |
+          yarn install # Install dependencies for App
+
+      - name: Run build for App
+        run: |
+          yarn run build
+
+      - name: Run TypeScript checks for App
+        run: |
+          yarn tsc --noEmit --skipLibCheck --strict # Run TypeScript checks for App
