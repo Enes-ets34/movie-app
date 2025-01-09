@@ -11,10 +11,9 @@ on:
       - dev
 
 jobs:
-
   client:
     name: Client CI
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
@@ -27,7 +26,7 @@ jobs:
 
       - name: Install dependencies for App
         run: |
-          yarn install # Install dependencies for App
+          yarn install --ignore-optional  # Opsiyonel bağımlılıkları göz ardı ederek kurulumu yapıyoruz.
 
       - name: Run build for App
         run: |
@@ -35,4 +34,4 @@ jobs:
 
       - name: Run TypeScript checks for App
         run: |
-          yarn tsc --noEmit --skipLibCheck --strict # Run TypeScript checks for App
+          yarn tsc --noEmit --skipLibCheck --strict # TypeScript kontrolleri çalıştırıyoruz.
