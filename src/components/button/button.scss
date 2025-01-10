@@ -1,0 +1,33 @@
+.button {
+  font-family: var(--font-family, "Source Sans Pro", sans-serif);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: center;
+  &--disabled {
+    background-color: var(--gray200, #e5e7eb);
+    color: var(--gray500, #6b7280);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--contained {
+    color: #fff;
+    border: none;
+
+    &.button--color {
+      background-color: currentColor;
+    }
+  }
+
+  &--outlined {
+    background-color: transparent;
+    border: 2px solid currentColor;
+
+    &.button--color {
+      color: currentColor;
+    }
+  }
+}
