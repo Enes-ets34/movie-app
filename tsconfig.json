@@ -12,7 +12,8 @@
       "@assets/*": ["src/assets/*"],
       "@theme/*": ["src/theme/*"],
       "@store/*": ["src/store/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@styles/*": ["src/styles/*"]
     },
     "jsx": "react-jsx",
     "types": ["react", "react-dom"],

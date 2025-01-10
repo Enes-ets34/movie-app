@@ -1,0 +1,38 @@
+@import './variables';
+@import './mixins';
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid;
+  font-family: inherit;
+  display: block;
+}
+
+.main {
+  padding-bottom: 3.125rem;
+
+  @include respond-to(large) {
+    padding-bottom: 6.5625rem;
+  }
+}

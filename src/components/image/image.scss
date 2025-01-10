@@ -1,0 +1,12 @@
+.image-wrapper {
+  display: inline-block;
+  position: relative;
+
+  img {
+    object-fit: contain;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+}

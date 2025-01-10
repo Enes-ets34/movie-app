@@ -4,7 +4,7 @@ import Icon from './components/icon/Icon';
 import { Icons } from './theme/icons';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Home } from './screens/home/HomeScreen';
-import { FilmDetail } from './screens/film-detail/FilmDetailScreen';
+import { MovieDetail } from './screens/movie-detail/MovieDetailScreen';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
       <div className='container' style={{ paddingTop: 144 }}>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/film-detail/:id' element={<FilmDetail />} />
+          <Route path='/movie-detail/:id' element={<MovieDetail />} />
         </Routes>
       </div>
     </Router>

@@ -7,6 +7,14 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "src/styles/_variables";`,
+      },
+    },
+    css: {
+      devSourcemap: false,
+    },
     plugins: [react(), svgr()],
     resolve: {
       alias: {
@@ -16,6 +24,7 @@ export default defineConfig(({ mode }) => {
         '@theme': path.resolve(__dirname, 'src/theme'),
         '@store': path.resolve(__dirname, 'src/store'),
         '@api': path.resolve(__dirname, 'src/api'),
+        '@styles': path.resolve(__dirname, 'src/styles'),
       },
     },
     define: {
@@ -24,9 +33,9 @@ export default defineConfig(({ mode }) => {
       ),
     },
     build: {
-      target: 'esnext',           
-      outDir: 'dist',             
-      sourcemap: true,            
+      target: 'esnext',
+      outDir: 'dist',
+      sourcemap: true,
       rollupOptions: {
         output: {
           entryFileNames: `[name].js`,
