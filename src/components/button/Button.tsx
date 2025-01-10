@@ -14,32 +14,38 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
 }) => {
   const buttonColor = Colors[color] || Colors.gray100;
+  
+  const isOutlined = variant === 'outlined';
+  const isContained = variant === 'contained';
+
+  const disabledColor = Colors.gray300;
+
+  const buttonStyle = {
+    ...style,
+    backgroundColor: isContained
+      ? disabled
+        ? disabledColor
+        : buttonColor
+      : undefined,
+    borderColor: isOutlined && !disabled ? buttonColor : Colors.gray300,
+    color:
+      isOutlined && !disabled
+        ? buttonColor
+        : isContained && disabled
+        ? Colors.gray500
+        : undefined,
+  };
 
   return (
     <button
       className={classNames(
         'button',
         `button--${variant}`,
-        { 'button--color': variant === 'outlined' },
+        { 'button--color': isOutlined },
         { 'button--disabled': disabled },
         className
       )}
-      style={{
-        ...style,
-        backgroundColor: variant === 'contained' ? buttonColor : undefined,
-        borderColor:
-          variant === 'outlined'
-            ? disabled
-              ? Colors.gray300
-              : buttonColor
-            : undefined,
-        color:
-          variant === 'outlined'
-            ? disabled
-              ? Colors.gray300
-              : buttonColor
-            : undefined,
-      }}
+      style={buttonStyle}
       onClick={onClick}
       disabled={disabled}
     >
