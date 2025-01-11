@@ -3,6 +3,7 @@ import classNames from '@/utils/classNames';
 import { ButtonProps } from './button.types';
 import './button.scss';
 import { Colors } from '@/theme/colors';
+import Text from '../text/Text';
 
 const Button: React.FC<ButtonProps> = ({
   text,
@@ -14,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
 }) => {
   const buttonColor = Colors[color] || Colors.gray100;
-  
+
   const isOutlined = variant === 'outlined';
   const isContained = variant === 'contained';
 
@@ -49,7 +50,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {text}
+      <Text size='lg' color={isOutlined ? color : ''}>{text}</Text>
     </button>
   );
 };

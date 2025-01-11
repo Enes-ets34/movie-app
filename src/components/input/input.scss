@@ -51,7 +51,7 @@
 
     .input-element {
       width: 100%;
-      border: 2px solid var(--gray-300);
+      border: 2px solid var(--gray-300); 
       border-radius: 0.375rem;
       background-color: transparent;
       color: black;
@@ -60,11 +60,12 @@
 
       &:focus {
         border-color: var(--blue-500);
-
-        ~ .input-icon svg {
-          stroke: var(--blue-500);
-        }
       }
+      
+    }
+
+    .input-error {
+      border-color: var(--red-600);
     }
 
     .input-label {
@@ -77,6 +78,10 @@
       color: black;
       transition: all 0.3s ease;
       pointer-events: none;
+    }
+
+    .input-label.label-error {
+      color: var(--red-600); 
     }
 
     .input-icon {
