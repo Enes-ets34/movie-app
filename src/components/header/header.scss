@@ -1,0 +1,55 @@
+@import "../../styles/mixins";
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    &__title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        flex: 1;
+
+        @include respond-to("medium") {
+            font-size: 2rem;
+        }
+
+        @include respond-to("large") {
+            font-size: 2.5rem;
+        }
+    }
+    .header-wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 2rem;
+    }
+    &__input {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 18rem;
+        display: flex;
+        justify-content: center;
+
+        @include respond-to("medium") {
+            max-width: 28rem;
+        }
+
+        @include respond-to("large") {
+            max-width: 32rem;
+        }
+    }
+
+    &__favorites {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}

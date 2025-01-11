@@ -5,4 +5,5 @@ export interface InputProps {
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  size?: 'sm' | 'md' | 'lg'; 
 }

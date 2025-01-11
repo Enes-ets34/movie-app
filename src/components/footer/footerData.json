@@ -1,0 +1,30 @@
+{
+    "icons": [
+      {
+        "name": "instagram",
+        "icon": "instagram",
+        "size": { "width": 24, "height": 24 }
+      },
+      {
+        "name": "facebook",
+        "icon": "facebook",
+        "size": { "width": 24, "height": 24 }
+      },
+      {
+        "name": "twitter",
+        "icon": "twitter",
+        "size": { "width": 24, "height": 24 }
+      },
+      {
+        "name": "youtube",
+        "icon": "youtube",
+        "size": { "width": 24, "height": 24 }
+      }
+    ],
+    "links": [
+      { "text": "Conditions of Use", "color": "gray900" },
+      { "text": "Privacy & Policy", "color": "gray900" },
+      { "text": "Press Room", "color": "gray900" }
+    ]
+  }
+  
