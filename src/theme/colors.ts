@@ -99,6 +99,7 @@ export const Colors = {
   indigo200: '#C7D2FE',
   indigo100: '#E0E7FF',
   indigo50: '#EEF2FF',
+  rose600: '#E11D48',
 };
 
 export type colors = keyof typeof Colors;

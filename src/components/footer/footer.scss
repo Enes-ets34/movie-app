@@ -1,0 +1,73 @@
+@import "../../styles/_mixins.scss";
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 2rem 1rem;
+
+    @include respond-to("small") {
+        padding: 0.25rem;
+    }
+
+    @include respond-to("medium") {
+        padding: 2rem 1rem;
+    }
+
+    @include respond-to("large") {
+        padding: 2rem 2rem;
+    }
+
+    &__icons {
+        display: flex;
+        gap: 3rem;
+        margin-bottom: 1rem;
+
+        @include respond-to("small") {
+            gap: 1.5rem;
+        }
+
+        @include respond-to("medium") {
+            gap: 2rem;
+        }
+    }
+
+    &__links {
+        display: flex;
+        gap: 3rem;
+        margin-bottom: 1rem;
+        @include respond-to("small") {
+            display: none;
+        }
+
+        @include respond-to("medium") {
+            flex-direction: row;
+            gap: 2rem;
+            display: flex;
+
+            font-size: 0.875rem;
+        }
+    }
+
+    &__copyright {
+        text-align: center;
+        font-size: 0.75rem;
+
+        @include respond-to("small") {
+            font-size: 0.625rem;
+        }
+
+        @include respond-to("medium") {
+            font-size: 0.75rem;
+        }
+
+        @include respond-to("large") {
+            font-size: 0.875rem;
+        }
+    }
+}
