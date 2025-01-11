@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import { Home } from './screens/home/HomeScreen';
 import { MovieDetail } from './screens/movie-detail/MovieDetailScreen';
+import { Login } from './screens/login/LoginScreen';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/movie-detail/:id' element={<MovieDetail />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </div>
       <Footer />
