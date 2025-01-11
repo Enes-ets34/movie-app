@@ -83,6 +83,7 @@ const LoginView = ({
         />
       </div>
       <Button
+        disabled={!!(errors?.email?.message || errors?.password?.message)}
         text='Giriş'
         onClick={handleSubmit}
         color='blue500'

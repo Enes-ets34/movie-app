@@ -11,6 +11,8 @@ import { MovieDetail } from './screens/movie-detail/MovieDetailScreen';
 import { Login } from './screens/login/LoginScreen';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
+import { AuthProvider } from './context/auth/auth.context';
+import { ProtectedRoute } from './components/protected-route/ProtectedRoute';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -26,8 +28,22 @@ const App: React.FC = () => {
       <Header page={getPage()} />
       <div className='container' style={{ paddingTop: 144 }}>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/movie-detail/:id' element={<MovieDetail />} />
+          <Route
+            path='/'
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/movie-detail/:id'
+            element={
+              <ProtectedRoute>
+                <MovieDetail />
+              </ProtectedRoute>
+            }
+          />
           <Route path='/login' element={<Login />} />
         </Routes>
       </div>
@@ -38,7 +54,9 @@ const App: React.FC = () => {
 
 const WrappedApp: React.FC = () => (
   <Router>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </Router>
 );
 

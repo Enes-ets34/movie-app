@@ -1,9 +1,21 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoginView from './LoginView';
+import { useNavigate } from 'react-router-dom';
+import { login, useAuth } from '@/context/auth/auth.context';
 
 export function Login(): JSX.Element {
+  const { state, dispatch } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (state.user) {
+      navigate('/');
+    }
+  }, [state.user, navigate]);
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email('Geçerli bir e-posta giriniz')
@@ -30,8 +42,8 @@ export function Login(): JSX.Element {
 
     if (emailValid && passwordValid) {
       const { email, password } = getValues();
-      console.log('Email:', email);
-      console.log('Password:', password);
+      login(dispatch, { id: email, password });
+      navigate('/');
     } else {
       console.log('Validasyon hatası var!');
     }

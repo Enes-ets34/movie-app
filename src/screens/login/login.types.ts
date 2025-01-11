@@ -9,5 +9,5 @@ export interface LoginProps {
   control: Control<LoginFormValues>; 
   errors: FieldErrors<LoginFormValues>;
   handleSubmit: () => void;
-  trigger: UseFormTrigger<LoginFormValues>; // trigger fonksiyonu da ekleniyor
+  trigger: UseFormTrigger<LoginFormValues>;
 }
