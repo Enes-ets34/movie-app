@@ -6,8 +6,16 @@ import Icon from '@/components/icon/Icon';
 import { Icons } from '@/theme/icons';
 import { Colors } from '@/theme/colors';
 import Badge from '@/components/badge/Badge';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
-const MovieDetailView = ({ movie, isFavorite, onFavoriteToggle }: MovieDetailProps): JSX.Element => {
+const MovieDetailView = ({
+  movie,
+  isFavorite,
+  onFavoriteToggle,
+}: MovieDetailProps): JSX.Element => {
+  const isMobile = useIsMobile();
+  const favoriteButtonColor = isFavorite ? Colors.red400 : Colors.gray300;
+
   if (!movie) return <></>;
 
   return (
@@ -16,7 +24,7 @@ const MovieDetailView = ({ movie, isFavorite, onFavoriteToggle }: MovieDetailPro
         <Badge
           onClick={e => {
             e.stopPropagation();
-            onFavoriteToggle(); 
+            onFavoriteToggle();
           }}
           position={{ top: '0', right: '0' }}
           color='#F3F4F680'
@@ -25,11 +33,15 @@ const MovieDetailView = ({ movie, isFavorite, onFavoriteToggle }: MovieDetailPro
           <Icon
             source={Icons.hearth_fill}
             size={{ width: 18, height: 18 }}
-            color={isFavorite ? Colors.red400 : Colors.gray300}
-            stroke={isFavorite ? Colors.red400 : Colors.gray300}
+            color={favoriteButtonColor}
+            stroke={favoriteButtonColor}
           />
         </Badge>
-        <Image src={movie?.poster} alt={movie?.name} height={700} />
+        <Image
+          src={movie?.poster}
+          alt={movie?.name}
+          height={!isMobile ? 700 : ''}
+        />
         <Text size='2xl'>{movie.summary}</Text>
       </div>
       <hr className='movie-detail__divider' />

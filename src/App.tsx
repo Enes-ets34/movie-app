@@ -13,10 +13,11 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import { AuthProvider } from './context/auth/auth.context';
 import { ProtectedRoute } from './components/protected-route/ProtectedRoute';
+import { useIsMobile } from './hooks/useIsMobile';
 
 const App: React.FC = () => {
   const location = useLocation();
-
+  const isMobile = useIsMobile();
   const getPage = (): 'login' | 'home' | 'film-detail' => {
     if (location.pathname === '/') return 'home';
     if (location.pathname.startsWith('/movie-detail')) return 'film-detail';
@@ -28,7 +29,7 @@ const App: React.FC = () => {
       <Header page={getPage()} />
       <div
         className='container'
-        style={{ paddingTop: 144, paddingBottom: 144 }}
+        style={{ paddingTop: !isMobile ? 144 : 80, paddingBottom: 144 }}
       >
         <Routes>
           <Route
