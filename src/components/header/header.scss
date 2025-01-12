@@ -13,12 +13,14 @@
     padding: 1rem;
 
     &__title,
-    &__movie-title {
+    &__movie__title {
         font-size: 1.5rem;
         font-weight: bold;
         text-align: center;
         flex: 1;
-
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         @include respond-to("small") {
             font-size: 2rem;
         }
@@ -28,8 +30,8 @@
         }
     }
 
-    &__movie-title {
-        padding-left: 2rem;
+    &__movie__title {
+        padding-left: 1rem;
 
         @include respond-to("large") {
             padding-left: 12rem;

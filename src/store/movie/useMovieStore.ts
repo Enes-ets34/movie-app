@@ -5,19 +5,22 @@ import { SortBy } from '@/types/types';
 
 interface MovieStore {
   movies: Movie[];
+  selectedMovie: Movie | null;
   favorites: string[];
   addToFavorites: (movieId: string) => void;
   removeFromFavorites: (movieId: string) => void;
   setMovies: (movies: Movie[]) => void;
+  setSelectedMovie: (movie: Movie | null) => void;
   fetchMoviesByName: (name: string) => Promise<void>;
   fetchMovies: (sortBy?: SortBy) => Promise<void>;
 }
 
 export const useMovieStore = create<MovieStore>(set => ({
   movies: [],
-  favorites: [], 
+  selectedMovie: null,
+  favorites: [],
+  setSelectedMovie: (movie: Movie | null) => set({ selectedMovie: movie }),
   setMovies: (movies: Movie[]) => set({ movies }),
-
   fetchMoviesByName: async (name: string) => {
     try {
       const moviesData = await getMoviesByName(name);
