@@ -1,11 +1,11 @@
-import { homeStyles } from './home.styles';
+import MoviesList from '@/components/movies-list/MoviesList';
 import { HomeProps } from './home.types';
 
-const HomeView = ({ value }: HomeProps): JSX.Element => {
+const HomeView = ({ movies }: HomeProps): JSX.Element => {
   return (
-    <>
-      <p style={homeStyles.textStyle}>{value}</p>
-    </>
+    <div>
+      <MoviesList movies={movies} />
+    </div>
   );
 };
 

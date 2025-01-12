@@ -1,3 +1,5 @@
+import { Movie } from '@/components/movie-card/movie.types';
+
 export interface MovieDetailProps {
-  value?: string;
+  movie: Movie;
 }
