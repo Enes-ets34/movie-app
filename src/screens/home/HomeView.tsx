@@ -9,6 +9,9 @@ const HomeView = ({
   onSortChange,
   onFilterChange,
 }: HomeProps): JSX.Element => {
+  if (!movies || movies?.length === 0) {
+    return <Text size='4xl'>Filmler Bulunamadı...</Text>;
+  }
   return (
     <div className='home-view'>
       <div className='home-view__header'>
@@ -30,7 +33,7 @@ const HomeView = ({
           />
         </div>
       </div>
-      <MoviesList movies={movies} /> 
+      <MoviesList movies={movies} />
     </div>
   );
 };

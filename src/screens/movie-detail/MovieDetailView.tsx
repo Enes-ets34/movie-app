@@ -16,7 +16,7 @@ const MovieDetailView = ({
   const isMobile = useIsMobile();
   const favoriteButtonColor = isFavorite ? Colors.red400 : Colors.gray300;
 
-  if (!movie) return <></>;
+  if (!movie) return <Text size='4xl'>Film bulunamadı...</Text>;
 
   return (
     <div className='movie-detail'>

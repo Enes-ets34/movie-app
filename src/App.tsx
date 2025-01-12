@@ -14,6 +14,7 @@ import Footer from './components/footer/Footer';
 import { AuthProvider } from './context/auth/auth.context';
 import { ProtectedRoute } from './components/protected-route/ProtectedRoute';
 import { useIsMobile } from './hooks/useIsMobile';
+import { NotFound } from './screens/not-found/Notfound';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -49,6 +50,7 @@ const App: React.FC = () => {
             }
           />
           <Route path='/login' element={<Login />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
       <Footer />
