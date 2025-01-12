@@ -10,32 +10,29 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
   const [searchKey, setSearchKey] = useState<string>('');
   return (
     <header className='header'>
-      {page === 'login' && <h1 className='header__title'>Movies App</h1>}
-
-      {page === 'home' && (
+      {page === 'login' ? (
+        <h1 className='header__title'>Movies App</h1>
+      ) : (
         <div className='container header-wrapper'>
           <div className='header__input'>
-            <Input
-              value={searchKey}
-              onChange={e => setSearchKey(e.target.value)}
-              type='text'
-              size='sm'
-              placeholder='search for movies..'
-              icon={Icons.search}
-            />
+            {page === 'film-detail' ? (
+              <h1 className='header__title'>Film Name</h1>
+            ) : (
+              <Input
+                value={searchKey}
+                onChange={e => setSearchKey(e.target.value)}
+                type='text'
+                size='sm'
+                placeholder='search for movies..'
+                icon={Icons.search}
+              />
+            )}
           </div>
           <div className='header__favorites'>
             <Text color={Colors.rose600}>Favorites</Text>
             <Text bold>6</Text>
           </div>
         </div>
-      )}
-
-      {page === 'film-detail' && (
-        <>
-          <h1 className='header__title'>Film Name</h1>
-          <div className='header__favorites'>Favorites</div>
-        </>
       )}
     </header>
   );

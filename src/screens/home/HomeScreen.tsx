@@ -1,9 +1,10 @@
+import { Movie } from '@/components/movie-card/movie.types';
 import HomeView from './HomeView';
-
 export function Home(): JSX.Element {
+  const movies: Movie[] = [];
   return (
     <>
-      <HomeView value='Home Page' />
+      <HomeView movies={movies} />
     </>
   );
 }

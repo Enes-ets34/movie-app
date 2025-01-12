@@ -26,7 +26,10 @@ const App: React.FC = () => {
   return (
     <>
       <Header page={getPage()} />
-      <div className='container' style={{ paddingTop: 144 }}>
+      <div
+        className='container'
+        style={{ paddingTop: 144, paddingBottom: 144 }}
+      >
         <Routes>
           <Route
             path='/'

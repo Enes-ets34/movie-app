@@ -1,0 +1,26 @@
+.movies-list {
+    &__item {
+        background: white;
+        padding: 1rem 2rem;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        position: relative;
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            cursor: pointer;
+        }
+    }
+
+    .imdb-box {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+    }
+}
