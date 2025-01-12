@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from '@/components/image/Image';
 import './movieDetail.scss';
 import { MovieDetailProps } from './movieDetail.types';
@@ -6,18 +7,21 @@ import Icon from '@/components/icon/Icon';
 import { Icons } from '@/theme/icons';
 import { Colors } from '@/theme/colors';
 import Badge from '@/components/badge/Badge';
-import { useIsMobile } from '@/hooks/useIsMobile';
 
 const MovieDetailView = ({
   movie,
-  isFavorite,
   onFavoriteToggle,
-}: MovieDetailProps): JSX.Element => {
-  const isMobile = useIsMobile();
-  const favoriteButtonColor = isFavorite ? Colors.red400 : Colors.gray300;
-
-  if (!movie) return <Text size='4xl'>Film bulunamadı...</Text>;
-
+  isExpanded,
+  setIsExpanded,
+  favoriteButtonColor,
+  isMobile,
+  isLongSummary,
+  displayedSummary,
+}: MovieDetailProps & {
+  isExpanded: boolean;
+  setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+  favoriteButtonColor: string;
+}): JSX.Element => {
   return (
     <div className='movie-detail'>
       <div className='movie-body'>
@@ -42,7 +46,17 @@ const MovieDetailView = ({
           alt={movie?.name}
           height={!isMobile ? 700 : ''}
         />
-        <Text size='2xl'>{movie.summary}</Text>
+        <div className='movie-summary'>
+          <Text size='2xl'>{displayedSummary}</Text>
+          {isLongSummary && (
+            <button
+              className='toggle-button'
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? 'Gizle' : 'Devamını Gör'}
+            </button>
+          )}
+        </div>
       </div>
       <hr className='movie-detail__divider' />
 
