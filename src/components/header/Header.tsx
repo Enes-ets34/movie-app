@@ -10,6 +10,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 
 const Header: React.FC<HeaderProps> = ({ page }) => {
   const [searchKey, setSearchKey] = useState<string>('');
+  const { selectedMovie } = useMovieStore();
   const debouncedSearchKey = useDebounce(searchKey, 750);
   const { fetchMovies, fetchMoviesByName, favorites } = useMovieStore();
   React.useEffect(() => {
@@ -27,8 +28,8 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
       ) : (
         <div className='container header-wrapper'>
           <div className='header__input'>
-            {page === 'film-detail' ? (
-              <h1 className='header__movie__title'>Film Name</h1>
+            {page === 'film-detail' && selectedMovie ? (
+              <h1 className='header__movie__title'>{selectedMovie?.name}</h1>
             ) : (
               <Input
                 value={searchKey}

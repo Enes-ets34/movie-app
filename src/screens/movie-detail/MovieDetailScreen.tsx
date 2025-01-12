@@ -8,7 +8,13 @@ import { useMovieStore } from '@/store/movie/useMovieStore';
 export function MovieDetail(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<Movie | undefined>();
-  const { favorites, addToFavorites, removeFromFavorites } = useMovieStore();
+  const {
+    favorites,
+    addToFavorites,
+    removeFromFavorites,
+    setSelectedMovie,
+  } = useMovieStore();
+
   const isFavorite = favorites.includes(movie?.id || '');
 
   useEffect(() => {
@@ -17,13 +23,18 @@ export function MovieDetail(): JSX.Element {
       try {
         const movieData = await getMovieById(id);
         setMovie(movieData);
+        setSelectedMovie(movieData);
       } catch (error) {
         console.error('Error fetching movie:', error);
       }
     };
 
     fetchMovie();
-  }, [id]);
+
+    return () => {
+      setSelectedMovie(null);
+    };
+  }, [id, setSelectedMovie]);
 
   const handleFavoriteToggle = () => {
     if (isFavorite) {
@@ -37,9 +48,9 @@ export function MovieDetail(): JSX.Element {
 
   return (
     <MovieDetailView
-      movie={movie} // movie objesini gönderiyoruz
-      isFavorite={isFavorite} // Favori durumu
-      onFavoriteToggle={handleFavoriteToggle} // Favoriye ekle/sil işlevini gönderiyoruz
+      movie={movie}
+      isFavorite={isFavorite}
+      onFavoriteToggle={handleFavoriteToggle}
     />
   );
 }

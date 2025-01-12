@@ -1,4 +1,4 @@
-import { Colors } from '@/theme/colors'; // Colors importu
+import { Colors } from '@/theme/colors';
 
 export type ButtonProps = {
   text: string;
