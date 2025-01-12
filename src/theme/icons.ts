@@ -6,6 +6,8 @@ import TwiitterIcon from '@assets/icons/Twitter.svg?react';
 import YoutubeIcon from '@assets/icons/Youtube.svg?react';
 import IMDBIcon from '@assets/icons/Imdb.svg?react';
 import HearthFillIcon from '@assets/icons/Heart_fill.svg?react';
+import AdjustmentsIcon from '@assets/icons/Adjustments.svg?react';
+import SwitchVerticalIcon from '@assets/icons/SwitchVertical.svg?react';
 
 export const Icons = {
   mail: MailIcon,
@@ -16,6 +18,8 @@ export const Icons = {
   youtube: YoutubeIcon,
   imdb: IMDBIcon,
   hearth_fill: HearthFillIcon,
+  adjustments: AdjustmentsIcon,
+  switch_vertical: SwitchVerticalIcon,
 };
 
 export type icons = keyof typeof Icons;

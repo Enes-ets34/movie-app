@@ -1,0 +1,42 @@
+@import "../../styles/variables";
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+
+    &__button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--lightBlue-50);
+        border: 2px solid var(--lightBlue-300);
+        border-radius: 0.5rem;
+        margin: 0;
+        list-style: none;
+        z-index: 100;
+    }
+
+    .filter-dropdown__item {
+        width: 8rem;
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+            background-color: var(--lightBlue-200);
+        }
+    }
+}
