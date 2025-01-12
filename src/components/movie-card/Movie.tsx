@@ -15,7 +15,7 @@ const Movie: React.FC<MovieProps> = ({ movie }) => {
   const navigate = useNavigate();
 
   const isFavorite = favorites.includes(movie?.id || '');
-
+  const favoriteButtonColor = isFavorite ? Colors.red400 : Colors.gray300;
   if (!movie) return null;
   return (
     <div
@@ -49,8 +49,8 @@ const Movie: React.FC<MovieProps> = ({ movie }) => {
         <Icon
           source={Icons.hearth_fill}
           size={{ width: 18, height: 18 }}
-          color={isFavorite ? Colors.red400 : Colors.gray300}
-          stroke={isFavorite ? Colors.red400 : Colors.gray300}
+          color={favoriteButtonColor}
+          stroke={favoriteButtonColor}
         />
       </Badge>
       <Image src={movie.poster || ''} alt={movie?.name || ''} />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './header.scss';
 import { HeaderProps } from './header.types';
 import Input from '../input/Input';
@@ -6,18 +6,19 @@ import { Icons } from '@/theme/icons';
 import Text from '../text/Text';
 import { Colors } from '@/theme/colors';
 import { useMovieStore } from '@/store/movie/useMovieStore';
+import { useDebounce } from '@/hooks/useDebounce';
 
 const Header: React.FC<HeaderProps> = ({ page }) => {
   const [searchKey, setSearchKey] = useState<string>('');
+  const debouncedSearchKey = useDebounce(searchKey, 750);
   const { fetchMovies, fetchMoviesByName, favorites } = useMovieStore();
-
-  useEffect(() => {
-    if (searchKey.length >= 3) {
-      fetchMoviesByName(searchKey);
+  React.useEffect(() => {
+    if (debouncedSearchKey.length >= 3) {
+      fetchMoviesByName(debouncedSearchKey);
     } else {
       fetchMovies();
     }
-  }, [searchKey, fetchMoviesByName, fetchMovies]);
+  }, [debouncedSearchKey, fetchMoviesByName, fetchMovies]);
 
   return (
     <header className='header'>
@@ -27,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
         <div className='container header-wrapper'>
           <div className='header__input'>
             {page === 'film-detail' ? (
-              <h1 className='header__title'>Film Name</h1>
+              <h1 className='header__movie__title'>Film Name</h1>
             ) : (
               <Input
                 value={searchKey}

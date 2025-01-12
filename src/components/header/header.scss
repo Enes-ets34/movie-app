@@ -1,4 +1,5 @@
 @import "../../styles/mixins";
+
 .header {
     position: fixed;
     top: 0;
@@ -10,13 +11,15 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    &__title {
+
+    &__title,
+    &__movie-title {
         font-size: 1.5rem;
         font-weight: bold;
         text-align: center;
         flex: 1;
 
-        @include respond-to("medium") {
+        @include respond-to("small") {
             font-size: 2rem;
         }
 
@@ -24,25 +27,37 @@
             font-size: 2.5rem;
         }
     }
+
+    &__movie-title {
+        padding-left: 2rem;
+
+        @include respond-to("large") {
+            padding-left: 12rem;
+        }
+    }
+
     .header-wrapper {
         display: flex;
         flex-direction: row;
         width: 100%;
         gap: 2rem;
     }
+
     &__input {
-        margin: 0 auto;
+        margin: 0 12rem 0 auto;
         width: 100%;
-        max-width: 18rem;
+        max-width: 24rem;
         display: flex;
         justify-content: center;
 
-        @include respond-to("medium") {
+        @include respond-to("small") {
             max-width: 28rem;
+            margin: 0 auto;
         }
 
         @include respond-to("large") {
             max-width: 32rem;
+            margin: 0 auto;
         }
     }
 
@@ -51,9 +66,11 @@
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
+
         @include respond-to("small") {
             padding-right: 0rem;
         }
+
         @include respond-to("medium") {
             padding-right: 2rem;
         }
