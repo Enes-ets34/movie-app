@@ -1,6 +1,6 @@
 export interface FilterDropdownProps {
   text: string;
   icon: string;
-  onClick?: () => void;
+  onClick?: (selectedOption: string) => void;
   menuItems?: string[];
 }

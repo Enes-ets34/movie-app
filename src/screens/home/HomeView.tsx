@@ -4,29 +4,33 @@ import Text from '@/components/text/Text';
 import FilterDropdown from '@/components/filter-dropdown/FilterDropdown';
 import './HomeView.scss';
 
-const HomeView = ({ movies }: HomeProps): JSX.Element => {
+const HomeView = ({
+  movies,
+  onSortChange,
+  onFilterChange,
+}: HomeProps): JSX.Element => {
   return (
-    <div className="home-view">
-      <div className="home-view__header">
-        <Text size="3xl" bold>
+    <div className='home-view'>
+      <div className='home-view__header'>
+        <Text size='3xl' bold>
           Movies
         </Text>
-        <div className="home-view__header__filters">
+        <div className='home-view__header__filters'>
           <FilterDropdown
-            text="Sırala"
-            icon="switch_vertical"
-            onClick={() => {}}
+            text='Sırala'
+            icon='switch_vertical'
+            onClick={onSortChange}
             menuItems={['Film Adı', 'Yayın Yılı', 'Imdb Puanı']}
           />
           <FilterDropdown
-            text="Filtrele"
-            icon="adjustments"
-            onClick={() => {}}
+            text='Filtrele'
+            icon='adjustments'
+            onClick={onFilterChange}
             menuItems={['Favoriler', 'Yeni eklenenler']}
           />
         </div>
       </div>
-      <MoviesList movies={movies} />
+      <MoviesList movies={movies} /> 
     </div>
   );
 };

@@ -13,18 +13,29 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   menuItems = [],
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<string | undefined>(
+    undefined
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
+  const toggleDropdown = () => setIsOpen(prev => !prev);
 
   const handleItemClick = (item: string) => {
-    console.log(`Selected: ${item}`);
+    if (item === selectedItem) {
+      setSelectedItem(undefined);
+      if (onClick) onClick('');
+    } else {
+      setSelectedItem(item);
+      if (onClick) onClick(item);
+    }
     setIsOpen(false);
-    if (onClick) onClick();
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setIsOpen(false);
     }
   };
@@ -37,9 +48,10 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   }, []);
 
   return (
-    <div className="filter-dropdown" ref={dropdownRef}>
-      <button className="filter-dropdown__button" onClick={toggleDropdown}>
+    <div className='filter-dropdown' ref={dropdownRef}>
+      <button className='filter-dropdown__button' onClick={toggleDropdown}>
         <Text color={Colors.lightBlue500}>{text}</Text>
+        {selectedItem && <span className='dot'></span>}
         {icon && (
           <Icon
             stroke={Colors.lightBlue500}
@@ -49,11 +61,13 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
         )}
       </button>
       {isOpen && (
-        <ul className="filter-dropdown__menu">
+        <ul className='filter-dropdown__menu'>
           {menuItems.map((item, index) => (
             <li
               key={index}
-              className="filter-dropdown__item"
+              className={`filter-dropdown__item ${
+                item === selectedItem ? 'selected' : ''
+              }`}
               onClick={() => handleItemClick(item)}
             >
               {item}

@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+
 .filter-dropdown {
     position: relative;
     display: inline-block;
@@ -38,5 +39,16 @@
         &:hover {
             background-color: var(--lightBlue-200);
         }
+        &.selected {
+            background-color: var(--lightBlue-400);
+        }
+    }
+    .dot {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0.2rem;
+        border-radius: 100%;
+        background-color: var(--indigo-500);
     }
 }

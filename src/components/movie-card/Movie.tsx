@@ -8,9 +8,14 @@ import { Icons } from '@/theme/icons';
 import Badge from '../badge/Badge';
 import { useNavigate } from 'react-router-dom';
 import { MovieProps } from './movie.types';
+import { useMovieStore } from '@/store/movie/useMovieStore';
 
 const Movie: React.FC<MovieProps> = ({ movie }) => {
+  const { favorites, addToFavorites, removeFromFavorites } = useMovieStore(); // Favori işlemleri
   const navigate = useNavigate();
+
+  const isFavorite = favorites.includes(movie?.id || '');
+
   if (!movie) return null;
   return (
     <div
@@ -20,7 +25,7 @@ const Movie: React.FC<MovieProps> = ({ movie }) => {
         navigate(`/movie-detail/${movie.id}`);
       }}
     >
-      {!movie.isTvSeries && (
+      {movie.isTvSeries && (
         <Badge position={{ top: '1.75rem', left: '2.5rem' }} color='#F3F4F680'>
           <Text color={Colors.gray900} size='xs' bold>
             TV SERIES
@@ -30,8 +35,12 @@ const Movie: React.FC<MovieProps> = ({ movie }) => {
 
       <Badge
         onClick={e => {
-          e?.stopPropagation();
-          console.log('Badge clicked');
+          e.stopPropagation();
+          if (isFavorite) {
+            removeFromFavorites(movie.id);
+          } else {
+            addToFavorites(movie.id);
+          }
         }}
         position={{ top: '1.75rem', right: '2.5rem' }}
         color='#F3F4F680'
@@ -40,8 +49,8 @@ const Movie: React.FC<MovieProps> = ({ movie }) => {
         <Icon
           source={Icons.hearth_fill}
           size={{ width: 18, height: 18 }}
-          color={Colors.red400}
-          stroke={Colors.red400}
+          color={isFavorite ? Colors.red400 : Colors.gray300}
+          stroke={isFavorite ? Colors.red400 : Colors.gray300}
         />
       </Badge>
       <Image src={movie.poster || ''} alt={movie?.name || ''} />

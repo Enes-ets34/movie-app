@@ -7,15 +7,16 @@ import { Icons } from '@/theme/icons';
 import { Colors } from '@/theme/colors';
 import Badge from '@/components/badge/Badge';
 
-const MovieDetailView = ({ movie }: MovieDetailProps): JSX.Element => {
+const MovieDetailView = ({ movie, isFavorite, onFavoriteToggle }: MovieDetailProps): JSX.Element => {
   if (!movie) return <></>;
+
   return (
     <div className='movie-detail'>
       <div className='movie-body'>
         <Badge
           onClick={e => {
-            e?.stopPropagation();
-            console.log('Badge clicked');
+            e.stopPropagation();
+            onFavoriteToggle(); 
           }}
           position={{ top: '0', right: '0' }}
           color='#F3F4F680'
@@ -24,11 +25,11 @@ const MovieDetailView = ({ movie }: MovieDetailProps): JSX.Element => {
           <Icon
             source={Icons.hearth_fill}
             size={{ width: 18, height: 18 }}
-            color={Colors.red400}
-            stroke={Colors.red400}
+            color={isFavorite ? Colors.red400 : Colors.gray300}
+            stroke={isFavorite ? Colors.red400 : Colors.gray300}
           />
         </Badge>
-        <Image src={movie?.poster} alt={movie?.name} />
+        <Image src={movie?.poster} alt={movie?.name} height={700} />
         <Text size='2xl'>{movie.summary}</Text>
       </div>
       <hr className='movie-detail__divider' />
