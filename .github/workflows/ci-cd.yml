@@ -1,37 +1,27 @@
-name: CI/CD Pipeline
+name: Build and Deploy Docker Image
 
 on:
   push:
     branches:
       - main
-      - dev
-  pull_request:
-    branches:
-      - main
-      - dev
 
 jobs:
-  client:
-    name: Client CI
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js for App
-        uses: actions/setup-node@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          node-version: '20.x'
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies for App
+      - name: Build and push Docker image
         run: |
-          yarn install --ignore-optional  # Opsiyonel bağımlılıkları göz ardı ederek kurulumu yapıyoruz.
-
-      - name: Run build for App
-        run: |
-          yarn run build
-
-      - name: Run TypeScript checks for App
-        run: |
-          yarn tsc --noEmit --skipLibCheck --strict # TypeScript kontrolleri çalıştırıyoruz.
+          docker build -t my-app .
+          docker push my-app
