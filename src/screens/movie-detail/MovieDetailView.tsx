@@ -6,11 +6,13 @@ import Text from '@/components/text/Text';
 import Icon from '@/components/icon/Icon';
 import { Icons } from '@/theme/icons';
 import { Colors } from '@/theme/colors';
-import Badge from '@/components/badge/Badge';
+import FavoriteButton from '@/components/favorite-button/FavoriteButton';
 
 const MovieDetailView = ({
   movie,
-  onFavoriteToggle,
+  isFavorite,
+  removeFromFavorites,
+  addToFavorites,
   isExpanded,
   setIsExpanded,
   favoriteButtonColor,
@@ -25,22 +27,14 @@ const MovieDetailView = ({
   return (
     <div className='movie-detail'>
       <div className='movie-body'>
-        <Badge
-          onClick={e => {
-            e.stopPropagation();
-            onFavoriteToggle();
-          }}
+        <FavoriteButton
+          movieId={movie.id}
+          isFavorite={isFavorite}
+          favoriteButtonColor={favoriteButtonColor}
+          addToFavorites={addToFavorites}
+          removeFromFavorites={removeFromFavorites}
           position={{ top: '0', right: '0' }}
-          color='#F3F4F680'
-          borderRadius='50%'
-        >
-          <Icon
-            source={Icons.hearth_fill}
-            size={{ width: 18, height: 18 }}
-            color={favoriteButtonColor}
-            stroke={favoriteButtonColor}
-          />
-        </Badge>
+        />
         <Image
           src={movie?.poster}
           alt={movie?.name}

@@ -6,6 +6,7 @@ import { getMovieById } from '@/services/movieService';
 import { useMovieStore } from '@/store/movie/useMovieStore';
 import { Colors } from '@/theme/colors';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { useLoadingStore } from '@/store/loading/loadingStore';
 
 export function MovieDetail(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -16,16 +17,21 @@ export function MovieDetail(): JSX.Element {
   const isMobile = useIsMobile();
   const isFavorite = favorites.includes(movie?.id || '');
   const favoriteButtonColor = isFavorite ? Colors.red400 : Colors.gray300;
+  const { setLoading } = useLoadingStore();
 
   useEffect(() => {
     const fetchMovie = async () => {
       if (!id) return;
+
+      setLoading(true);
       try {
         const movieData = await getMovieById(id);
         setMovie(movieData);
         setSelectedMovie(movieData);
       } catch (error) {
         console.error('Error fetching movie:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -34,29 +40,24 @@ export function MovieDetail(): JSX.Element {
     return () => {
       setSelectedMovie(null);
     };
-  }, [id, setSelectedMovie]);
+  }, [id, setSelectedMovie, setLoading]);
 
-  const handleFavoriteToggle = () => {
-    if (isFavorite) {
-      removeFromFavorites(movie?.id || '');
-    } else {
-      addToFavorites(movie?.id || '');
-    }
-  };
   const isLongSummary = movie ? movie.summary.length > 250 : false;
   const displayedSummary = isExpanded
     ? movie?.summary
     : `${movie?.summary.slice(0, 250)}...`;
 
-  if (!movie) return <p>Loading...</p>;
+  if (!movie) return <></>;
 
   return (
     <MovieDetailView
+      isFavorite={isFavorite}
       isLongSummary={isLongSummary}
       displayedSummary={displayedSummary || ''}
       movie={movie}
       isMobile={isMobile}
-      onFavoriteToggle={handleFavoriteToggle}
+      addToFavorites={addToFavorites}
+      removeFromFavorites={removeFromFavorites}
       isExpanded={isExpanded}
       setIsExpanded={setIsExpanded}
       favoriteButtonColor={favoriteButtonColor}

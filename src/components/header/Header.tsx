@@ -7,19 +7,33 @@ import Text from '../text/Text';
 import { Colors } from '@/theme/colors';
 import { useMovieStore } from '@/store/movie/useMovieStore';
 import { useDebounce } from '@/hooks/useDebounce';
+import { useLoadingStore } from '@/store/loading/loadingStore';
 
 const Header: React.FC<HeaderProps> = ({ page }) => {
   const [searchKey, setSearchKey] = useState<string>('');
   const { selectedMovie } = useMovieStore();
   const debouncedSearchKey = useDebounce(searchKey, 750);
   const { fetchMovies, fetchMoviesByName, favorites } = useMovieStore();
+  const { setLoading } = useLoadingStore();
+
   useEffect(() => {
-    if (debouncedSearchKey.length >= 3) {
-      fetchMoviesByName(debouncedSearchKey);
-    } else {
-      fetchMovies();
-    }
-  }, [debouncedSearchKey, fetchMoviesByName, fetchMovies]);
+    const fetchMoviesWithLoading = async () => {
+      setLoading(true);
+      try {
+        if (debouncedSearchKey.length >= 3) {
+          await fetchMoviesByName(debouncedSearchKey);
+        } else {
+          await fetchMovies();
+        }
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMoviesWithLoading();
+  }, [debouncedSearchKey, fetchMoviesByName, fetchMovies, useLoadingStore]);
 
   return (
     <header className='header'>

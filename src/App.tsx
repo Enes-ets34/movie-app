@@ -11,13 +11,19 @@ import { MovieDetail } from './screens/movie-detail/MovieDetailScreen';
 import { Login } from './screens/login/LoginScreen';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
+import { useToastStore } from '@/store/toast/toastStore';
 import { AuthProvider } from './context/auth/auth.context';
 import { ProtectedRoute } from './components/protected-route/ProtectedRoute';
 import { useIsMobile } from './hooks/useIsMobile';
 import { NotFound } from './screens/not-found/Notfound';
 import { RoutesEnum } from './utils/handleNavigate';
-
+import Toast from './components/toast/Toast';
+import Loading from './components/loading/Loading';
+import { useLoadingStore } from './store/loading/loadingStore';
 const App: React.FC = () => {
+  const { message, type, hideToast } = useToastStore(state => state);
+  const isLoading = useLoadingStore(state => state.isLoading);
+
   const location = useLocation();
   const isMobile = useIsMobile();
   const getPage = (): 'login' | 'home' | 'film-detail' => {
@@ -54,6 +60,8 @@ const App: React.FC = () => {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
+      <Toast message={message} type={type} hideToast={hideToast} />
+      <Loading isLoading={isLoading} />
       <Footer />
     </>
   );

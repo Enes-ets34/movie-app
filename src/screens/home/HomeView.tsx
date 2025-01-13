@@ -9,9 +9,10 @@ const HomeView = ({
   onSortChange,
   onFilterChange,
 }: HomeProps): JSX.Element => {
-  if (!movies || movies?.length === 0) {
+  if (!movies) {
     return <Text size='4xl'>Filmler Bulunamadı...</Text>;
   }
+
   return (
     <div className='home-view'>
       <div className='home-view__header'>
