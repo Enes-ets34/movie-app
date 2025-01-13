@@ -13,14 +13,14 @@ on:
 jobs:
   client:
     name: Client CI
-    runs-on: ubuntu-latest  # macos-latest yerine ubuntu-latest kullandık.
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Güncel sürüme geçildi.
+        uses: actions/checkout@v2
 
       - name: Set up Node.js for App
-        uses: actions/setup-node@v3  # Güncel sürüme geçildi.
+        uses: actions/setup-node@v2
         with:
           node-version: '20.x'
 
