@@ -32,21 +32,14 @@ export const useMovieStore = create<MovieStore>(set => ({
     set(state => ({
       favorites: state.favorites.filter(id => id !== movieId),
     })),
+    
   fetchMoviesByName: async (name: string) => {
-    try {
-      const moviesData = await getMoviesByName(name);
-      set({ movies: moviesData });
-    } catch (error) {
-      console.error('Error fetching movies by name:', error);
-    }
+    const moviesData = await getMoviesByName(name);
+    set({ movies: moviesData });
   },
 
-  fetchMovies: async (sortBy: SortBy = '') => {
-    try {
-      const moviesData = await getMovies(sortBy);
-      set({ movies: moviesData });
-    } catch (error) {
-      console.error('Error fetching movies:', error);
-    }
+  fetchMovies: async (sortBy: SortBy = ''): Promise<void> => {
+    const moviesData = await getMovies(sortBy);
+    set({ movies: moviesData });
   },
 }));

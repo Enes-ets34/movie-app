@@ -1,14 +1,15 @@
 import './movie.scss';
 import React from 'react';
-import Image from '../image/Image';
-import Text from '../text/Text';
 import { Colors } from '@/theme/colors';
-import Icon from '../icon/Icon';
 import { Icons } from '@/theme/icons';
-import Badge from '../badge/Badge';
 import { MovieProps } from './movie.types';
 import { useMovieStore } from '@/store/movie/useMovieStore';
 import { RoutesEnum } from '@/utils/handleNavigate';
+import Image from '../image/Image';
+import Text from '../text/Text';
+import Icon from '../icon/Icon';
+import FavoriteButton from '../favorite-button/FavoriteButton';
+import Badge from '../badge/Badge';
 
 const Movie: React.FC<MovieProps> = ({ movie, handleNavigate }) => {
   const { favorites, addToFavorites, removeFromFavorites } = useMovieStore();
@@ -37,26 +38,14 @@ const Movie: React.FC<MovieProps> = ({ movie, handleNavigate }) => {
         </Badge>
       )}
 
-      <Badge
-        onClick={e => {
-          e.stopPropagation();
-          if (isFavorite) {
-            removeFromFavorites(movie.id);
-          } else {
-            addToFavorites(movie.id);
-          }
-        }}
+      <FavoriteButton
+        movieId={movie.id}
+        isFavorite={isFavorite}
+        favoriteButtonColor={favoriteButtonColor}
+        addToFavorites={addToFavorites}
+        removeFromFavorites={removeFromFavorites}
         position={{ top: '1.75rem', right: '2.5rem' }}
-        color='#F3F4F680'
-        borderRadius='50%'
-      >
-        <Icon
-          source={Icons.hearth_fill}
-          size={{ width: 18, height: 18 }}
-          color={favoriteButtonColor}
-          stroke={favoriteButtonColor}
-        />
-      </Badge>
+      />
       <Image src={movie.poster || ''} alt={movie?.name || ''} />
       <Text bold color={Colors?.gray400} size='xs'>
         {movie?.year} , {movie?.country}

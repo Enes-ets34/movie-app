@@ -2,23 +2,41 @@ import { useEffect, useState } from 'react';
 import { useMovieStore } from '@/store/movie/useMovieStore';
 import HomeView from './HomeView';
 import { SortBy } from '@/types/types';
+import { useToastStore } from '@/store/toast/toastStore';
+import { useLoadingStore } from '@/store/loading/loadingStore';
 
 export function Home(): JSX.Element {
   const { movies, fetchMovies, favorites } = useMovieStore();
+  const { showToast } = useToastStore();
+  const { setLoading } = useLoadingStore(); // Zustand'dan setLoading fonksiyonunu alıyoruz
   const [sortBy, setSortBy] = useState<SortBy | undefined>(undefined);
   const [showFavorites, setShowFavorites] = useState(false);
 
-  // Filmleri ilk kez yükleme
   useEffect(() => {
     if (!movies.length) {
-      fetchMovies();
+      setLoading(true);
+      fetchMovies()
+        .then(result => {
+          if (result === undefined) {
+            showToast('Film(ler) bulunamadı...', 'error');
+          }
+        })
+        .catch(err => {
+          showToast(err, 'error');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-  }, [fetchMovies, movies.length]);
+  }, [fetchMovies, movies.length, setLoading, showToast]);
 
   // Sıralama değiştiğinde filmleri güncelle
   useEffect(() => {
-    fetchMovies(sortBy);
-  }, [sortBy, fetchMovies]);
+    setLoading(true);
+    fetchMovies(sortBy).finally(() => {
+      setLoading(false);
+    });
+  }, [sortBy, fetchMovies, setLoading]);
 
   // Filtrelenmiş filmleri hesapla
   const filteredMovies = showFavorites
