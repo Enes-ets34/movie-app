@@ -1,4 +1,4 @@
-import './Loading.scss';
+import './loading.scss';
 import { LoadingProps } from './loading.types';
 
 const Loading = ({ isLoading }: LoadingProps) => {

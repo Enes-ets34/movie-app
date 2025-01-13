@@ -2,7 +2,7 @@ import MoviesList from '@/components/movies-list/MoviesList';
 import { HomeProps } from './home.types';
 import Text from '@/components/text/Text';
 import FilterDropdown from '@/components/filter-dropdown/FilterDropdown';
-import './HomeView.scss';
+import './homeView.scss';
 
 const HomeView = ({
   movies,

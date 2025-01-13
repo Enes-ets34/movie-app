@@ -1,3 +1,15 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
 jobs:
   client:
     name: Client CI
@@ -12,14 +24,9 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Install normal dependencies for App
+      - name: Install dependencies for App
         run: |
-          yarn install --optional # Opsiyonel bağımlılıkları dahil etmeden normal bağımlılıkları kuruyoruz.
-
-      - name: Conditionally install optional dependencies (e.g., Docker specific)
-        if: runner.os == 'Linux'  
-        run: |
-          yarn add @rollup/rollup-linux-x64-gnu --optional  # Opsiyonel bağımlılığı manuel olarak kuruyoruz.
+          yarn install --optional  # Opsiyonel bağımlılıkları göz ardı ederek kurulumu yapıyoruz.
 
       - name: Run build for App
         run: |

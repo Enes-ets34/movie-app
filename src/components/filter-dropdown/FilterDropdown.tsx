@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './FilterDropdown.scss';
+import './filterDropdown.scss';
 import Text from '../text/Text';
 import Icon from '../icon/Icon';
 import { Icons } from '@/theme/icons';
