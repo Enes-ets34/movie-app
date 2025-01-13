@@ -13,16 +13,20 @@ on:
 jobs:
   client:
     name: Client CI
-    runs-on: ubuntu-latest  # MacOS yerine Ubuntu kullanıyoruz
+    runs-on: ubuntu-latest  # Linux platformu kullanıyoruz
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3  # Güncel sürüm
 
       - name: Set up Node.js for App
-        uses: actions/setup-node@v3  # Güncel sürüm
+        uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+
+      - name: Clean yarn and node_modules
+        run: |
+          rm -rf node_modules yarn.lock  # Eski node_modules ve yarn.lock dosyalarını sil
 
       - name: Install dependencies for App
         run: |
@@ -34,4 +38,4 @@ jobs:
 
       - name: Run TypeScript checks for App
         run: |
-          yarn tsc --noEmit --skipLibCheck --strict # TypeScript kontrolleri çalıştırıyoruz.
+          yarn tsc --noEmit --skipLibCheck --strict  # TypeScript kontrolleri çalıştırıyoruz.
