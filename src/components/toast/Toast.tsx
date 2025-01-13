@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import './toast.scss';
+import './Toast.scss';
 
 import { ToastProps } from './toast.types';
 
