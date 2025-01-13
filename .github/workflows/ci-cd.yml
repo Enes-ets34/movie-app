@@ -14,7 +14,7 @@ jobs:
 
       - name: Install normal dependencies for App
         run: |
-          yarn install --frozen-lockfile  # Opsiyonel bağımlılıkları dahil etmeden normal bağımlılıkları kuruyoruz.
+          yarn install --optional # Opsiyonel bağımlılıkları dahil etmeden normal bağımlılıkları kuruyoruz.
 
       - name: Conditionally install optional dependencies (e.g., Docker specific)
         if: runner.os == 'Linux'  
