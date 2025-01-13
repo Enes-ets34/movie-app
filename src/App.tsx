@@ -15,6 +15,7 @@ import { AuthProvider } from './context/auth/auth.context';
 import { ProtectedRoute } from './components/protected-route/ProtectedRoute';
 import { useIsMobile } from './hooks/useIsMobile';
 import { NotFound } from './screens/not-found/Notfound';
+import { RoutesEnum } from './utils/handleNavigate';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -34,7 +35,7 @@ const App: React.FC = () => {
       >
         <Routes>
           <Route
-            path='/'
+            path={RoutesEnum.HOME}
             element={
               <ProtectedRoute>
                 <Home />
@@ -42,14 +43,14 @@ const App: React.FC = () => {
             }
           />
           <Route
-            path='/movie-detail/:id'
+            path={RoutesEnum.MOVIE_DETAIL}
             element={
               <ProtectedRoute>
                 <MovieDetail />
               </ProtectedRoute>
             }
           />
-          <Route path='/login' element={<Login />} />
+          <Route path={RoutesEnum.LOGIN} element={<Login />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </div>

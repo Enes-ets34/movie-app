@@ -3,16 +3,16 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoginView from './LoginView';
-import { useNavigate } from 'react-router-dom';
 import { login, useAuth } from '@/context/auth/auth.context';
+import { RoutesEnum, useHandleNavigate } from '@/utils/handleNavigate';
 
 export function Login(): JSX.Element {
   const { state, dispatch } = useAuth();
-  const navigate = useNavigate();
+  const navigate = useHandleNavigate();
 
   useEffect(() => {
     if (state.user) {
-      navigate('/');
+      navigate(RoutesEnum.HOME);
     }
   }, [state.user, navigate]);
 
@@ -43,7 +43,7 @@ export function Login(): JSX.Element {
     if (emailValid && passwordValid) {
       const { email, password } = getValues();
       login(dispatch, { id: email, password });
-      navigate('/');
+      navigate(RoutesEnum.HOME);
     } else {
       console.log('Validasyon hatası var!');
     }

@@ -6,23 +6,27 @@ import { Colors } from '@/theme/colors';
 import Icon from '../icon/Icon';
 import { Icons } from '@/theme/icons';
 import Badge from '../badge/Badge';
-import { useNavigate } from 'react-router-dom';
 import { MovieProps } from './movie.types';
 import { useMovieStore } from '@/store/movie/useMovieStore';
+import { RoutesEnum } from '@/utils/handleNavigate';
 
-const Movie: React.FC<MovieProps> = ({ movie }) => {
-  const { favorites, addToFavorites, removeFromFavorites } = useMovieStore(); // Favori işlemleri
-  const navigate = useNavigate();
-
+const Movie: React.FC<MovieProps> = ({ movie, handleNavigate }) => {
+  const { favorites, addToFavorites, removeFromFavorites } = useMovieStore();
   const isFavorite = favorites.includes(movie?.id || '');
   const favoriteButtonColor = isFavorite ? Colors.red400 : Colors.gray300;
+
   if (!movie) return null;
+
   return (
     <div
       key={movie.id}
       className='movies-list__item'
       onClick={() => {
-        navigate(`/movie-detail/${movie.id}`);
+        if (handleNavigate) {
+          handleNavigate(RoutesEnum.MOVIE_DETAIL, {
+            params: { id: movie.id },
+          });
+        }
       }}
     >
       {movie.isTvSeries && (
