@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './header.scss';
 import { HeaderProps } from './header.types';
 import Input from '../input/Input';
@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
   const { selectedMovie } = useMovieStore();
   const debouncedSearchKey = useDebounce(searchKey, 750);
   const { fetchMovies, fetchMoviesByName, favorites } = useMovieStore();
-  React.useEffect(() => {
+  useEffect(() => {
     if (debouncedSearchKey.length >= 3) {
       fetchMoviesByName(debouncedSearchKey);
     } else {

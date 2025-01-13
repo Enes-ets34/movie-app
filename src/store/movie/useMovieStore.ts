@@ -21,6 +21,17 @@ export const useMovieStore = create<MovieStore>(set => ({
   favorites: [],
   setSelectedMovie: (movie: Movie | null) => set({ selectedMovie: movie }),
   setMovies: (movies: Movie[]) => set({ movies }),
+  addToFavorites: (movieId: string) =>
+    set(state => ({
+      favorites: state.favorites.includes(movieId)
+        ? state.favorites
+        : [...state.favorites, movieId],
+    })),
+
+  removeFromFavorites: (movieId: string) =>
+    set(state => ({
+      favorites: state.favorites.filter(id => id !== movieId),
+    })),
   fetchMoviesByName: async (name: string) => {
     try {
       const moviesData = await getMoviesByName(name);
@@ -38,16 +49,4 @@ export const useMovieStore = create<MovieStore>(set => ({
       console.error('Error fetching movies:', error);
     }
   },
-
-  addToFavorites: (movieId: string) =>
-    set(state => ({
-      favorites: state.favorites.includes(movieId)
-        ? state.favorites
-        : [...state.favorites, movieId],
-    })),
-
-  removeFromFavorites: (movieId: string) =>
-    set(state => ({
-      favorites: state.favorites.filter(id => id !== movieId),
-    })),
 }));

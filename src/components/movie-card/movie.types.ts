@@ -1,3 +1,5 @@
+import { RoutesEnum } from '@/utils/handleNavigate';
+
 export interface Movie {
   id: string;
   name: string;
@@ -11,5 +13,8 @@ export interface Movie {
 }
 export interface MovieProps {
   movie: Movie;
-  handleOnClick?: () => void;
+  handleNavigate?: (
+    route: RoutesEnum,
+    options: { params: { id: string } }
+  ) => void;
 }
