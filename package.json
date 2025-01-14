@@ -12,7 +12,9 @@
     "lint-and-check": "yarn lint && yarn type-check",
     "type-check": "tsc --noemit --skipLibCheck --strict --isolatedModules",
     "prepare": "husky install",
-    "lint-staged": "npx lint-staged"
+    "lint-staged": "npx lint-staged",
+    "docker:build": "docker build -t octet-case .",
+    "docker:run": "docker run -p 5173:80 octet-case"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
