@@ -4,6 +4,10 @@
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1rem;
   text-align: center;
   &--disabled {
     background-color: var(--gray200, #e5e7eb);

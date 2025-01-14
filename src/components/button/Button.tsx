@@ -4,6 +4,7 @@ import { ButtonProps } from './button.types';
 import './button.scss';
 import { Colors } from '@/theme/colors';
 import Text from '../text/Text';
+import Icon from '../icon/Icon';
 
 const Button: React.FC<ButtonProps> = ({
   text,
@@ -13,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   style,
   disabled = false,
+  icon,
 }) => {
   const buttonColor = Colors[color] || Colors.gray100;
 
@@ -50,7 +52,16 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      <Text size='lg' color={isOutlined ? color : ''}>{text}</Text>
+      <Text size='lg' color={isOutlined ? color : ''}>
+        {text}
+      </Text>
+      {icon && (
+        <Icon
+          source={icon}
+          stroke={isContained ? buttonColor : 'white'}
+          size={{ width: 16 }}
+        />
+      )}
     </button>
   );
 };
