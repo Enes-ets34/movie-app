@@ -21,9 +21,7 @@ function Home(): JSX.Element {
       setLoading(true);
       fetchMovies()
         .then(result => {
-          if (result === undefined) {
-            showToast('Film(ler) bulunamadı...', 'error');
-          }
+          console.log('result :>> ', result);
         })
         .catch(err => {
           showToast(err, 'error');
