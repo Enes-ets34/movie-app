@@ -6,6 +6,7 @@ import Button from '@/components/button/Button';
 import { Colors } from '@/theme/colors';
 import Text from '@/components/text/Text';
 import { Controller } from 'react-hook-form';
+import { Icons } from '@/theme/icons';
 
 const LoginView = ({
   control,
@@ -88,6 +89,7 @@ const LoginView = ({
         onClick={handleSubmit}
         color='blue500'
         variant='outlined'
+        icon={Icons.chevron_right}
       />
     </div>
   );

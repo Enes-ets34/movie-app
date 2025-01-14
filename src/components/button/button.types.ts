@@ -8,4 +8,5 @@ export type ButtonProps = {
   className?: string;
   style?: React.CSSProperties;
   disabled?: boolean;
+  icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 };
