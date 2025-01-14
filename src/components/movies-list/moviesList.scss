@@ -1,4 +1,4 @@
-@import "../../styles/mixins";
+@use "../../styles/mixins" as *;
 
 .movies-list {
     display: grid;
@@ -11,5 +11,4 @@
     @include respond-to("large") {
         grid-template-columns: repeat(4, 1fr);
     }
-
 }

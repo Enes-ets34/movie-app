@@ -1,13 +1,27 @@
+@use "sass:map";
+
 $breakpoints: (
-  'small': 375px,
-  'medium': 767px,
-  'large': 992px,
-  'xlarge': 1400px
+  "small": 375px,
+  "medium": 767px,
+  "large": 992px,
+  "xlarge": 1400px
 ) !default;
 
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @mixin respond-to($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
       @content;
     }
   }
