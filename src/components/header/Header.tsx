@@ -8,6 +8,7 @@ import { Colors } from '@/theme/colors';
 import { useMovieStore } from '@/store/movie/useMovieStore';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useLoadingStore } from '@/store/loading/loadingStore';
+import { useAuth } from '@/context/auth/auth.context';
 
 const Header: React.FC<HeaderProps> = ({ page }) => {
   const [searchKey, setSearchKey] = useState<string>('');
@@ -15,25 +16,35 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
   const debouncedSearchKey = useDebounce(searchKey, 750);
   const { fetchMovies, fetchMoviesByName, favorites } = useMovieStore();
   const { setLoading } = useLoadingStore();
-
+  const {
+    state: { user },
+  } = useAuth();
   useEffect(() => {
-    const fetchMoviesWithLoading = async () => {
-      setLoading(true);
-      try {
-        if (debouncedSearchKey.length >= 3) {
-          await fetchMoviesByName(debouncedSearchKey);
-        } else {
-          await fetchMovies();
+    if (user) {
+      const fetchMoviesWithLoading = async () => {
+        setLoading(true);
+        try {
+          if (debouncedSearchKey.length >= 3) {
+            await fetchMoviesByName(debouncedSearchKey);
+          } else {
+            await fetchMovies();
+          }
+        } catch (error) {
+          console.error('Error fetching movies:', error);
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
-    fetchMoviesWithLoading();
-  }, [debouncedSearchKey, fetchMoviesByName, fetchMovies, useLoadingStore]);
+      fetchMoviesWithLoading();
+    }
+  }, [
+    debouncedSearchKey,
+    fetchMoviesByName,
+    fetchMovies,
+    useLoadingStore,
+    user,
+  ]);
 
   return (
     <header className='header'>

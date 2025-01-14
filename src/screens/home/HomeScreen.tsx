@@ -3,6 +3,7 @@ import { useMovieStore } from '@/store/movie/useMovieStore';
 import { SortBy } from '@/types/types';
 import { useToastStore } from '@/store/toast/toastStore';
 import { useLoadingStore } from '@/store/loading/loadingStore';
+import { useAuth } from '@/context/auth/auth.context';
 
 const HomeView = React.lazy(() => import('./HomeView'));
 
@@ -12,37 +13,44 @@ function Home(): JSX.Element {
   const { setLoading } = useLoadingStore();
   const [sortBy, setSortBy] = useState<SortBy | undefined>(undefined);
   const [showFavorites, setShowFavorites] = useState(false);
-
+  const {
+    state: { user },
+  } = useAuth();
   useEffect(() => {
     if (!movies.length) {
       setLoading(true);
-      fetchMovies()
-        .then(result => {
-          if (result === undefined) {
-            showToast('Film(ler) bulunamadı...', 'error');
-          }
-        })
-        .catch(err => {
-          showToast(err, 'error');
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      if (user) {
+        fetchMovies()
+          .then(result => {
+            if (result === undefined) {
+              showToast('Film(ler) bulunamadı...', 'error');
+            }
+          })
+          .catch(err => {
+            showToast(err, 'error');
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
     }
-  }, [fetchMovies, movies.length, setLoading, showToast]);
+  }, [fetchMovies, movies.length, setLoading, showToast, user]);
 
   useEffect(() => {
     setLoading(true);
-    fetchMovies(sortBy).finally(() => {
-      setLoading(false);
-    });
-  }, [sortBy, fetchMovies, setLoading]);
+    if (user) {
+      fetchMovies(sortBy).finally(() => {
+        setLoading(false);
+      });
+    }
+  }, [sortBy, fetchMovies, setLoading, user]);
 
   const filteredMovies = showFavorites
     ? movies.filter(movie => favorites.includes(movie.id))
     : movies;
 
   const handleSortChange = (selectedOption: string) => {
+    if (!user) return null;
     if (selectedOption === '') {
       setSortBy(undefined);
     } else {
