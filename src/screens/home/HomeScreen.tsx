@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMovieStore } from '@/store/movie/useMovieStore';
-import HomeView from './HomeView';
 import { SortBy } from '@/types/types';
 import { useToastStore } from '@/store/toast/toastStore';
 import { useLoadingStore } from '@/store/loading/loadingStore';
 
-export function Home(): JSX.Element {
+const HomeView = React.lazy(() => import('./HomeView'));
+
+function Home(): JSX.Element {
   const { movies, fetchMovies, favorites } = useMovieStore();
   const { showToast } = useToastStore();
-  const { setLoading } = useLoadingStore(); // Zustand'dan setLoading fonksiyonunu alıyoruz
+  const { setLoading } = useLoadingStore();
   const [sortBy, setSortBy] = useState<SortBy | undefined>(undefined);
   const [showFavorites, setShowFavorites] = useState(false);
 
@@ -30,7 +31,6 @@ export function Home(): JSX.Element {
     }
   }, [fetchMovies, movies.length, setLoading, showToast]);
 
-  // Sıralama değiştiğinde filmleri güncelle
   useEffect(() => {
     setLoading(true);
     fetchMovies(sortBy).finally(() => {
@@ -38,12 +38,10 @@ export function Home(): JSX.Element {
     });
   }, [sortBy, fetchMovies, setLoading]);
 
-  // Filtrelenmiş filmleri hesapla
   const filteredMovies = showFavorites
     ? movies.filter(movie => favorites.includes(movie.id))
     : movies;
 
-  // Sıralama işlemi
   const handleSortChange = (selectedOption: string) => {
     if (selectedOption === '') {
       setSortBy(undefined);
@@ -70,3 +68,4 @@ export function Home(): JSX.Element {
     />
   );
 }
+export default Home;
