@@ -19,22 +19,20 @@ function Home(): JSX.Element {
   useEffect(() => {
     if (!movies.length) {
       setLoading(true);
-      if (user) {
-        fetchMovies()
-          .then(result => {
-            if (result === undefined) {
-              showToast('Film(ler) bulunamadı...', 'error');
-            }
-          })
-          .catch(err => {
-            showToast(err, 'error');
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-      }
+      fetchMovies()
+        .then(result => {
+          if (result === undefined) {
+            showToast('Film(ler) bulunamadı...', 'error');
+          }
+        })
+        .catch(err => {
+          showToast(err, 'error');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-  }, [fetchMovies, movies.length, setLoading, showToast, user]);
+  }, [fetchMovies, movies.length, setLoading, showToast]);
 
   useEffect(() => {
     setLoading(true);
