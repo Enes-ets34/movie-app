@@ -1,7 +1,8 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
 
 .toast {
+    @include flex-center;
     position: fixed;
     top: 2rem;
     right: 0;
@@ -11,9 +12,6 @@
     color: white;
     background-color: white;
     font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
@@ -27,7 +25,6 @@
 
     @include respond-to("large") {
         width: 20%;
-        
     }
 
     &.success {

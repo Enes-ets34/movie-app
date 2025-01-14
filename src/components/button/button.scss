@@ -1,12 +1,12 @@
+@use "../../styles/mixins" as *;
+
 .button {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
   gap: 0.1rem;
   text-align: center;
   &--disabled {

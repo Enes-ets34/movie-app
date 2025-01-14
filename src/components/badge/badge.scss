@@ -1,7 +1,7 @@
+@use "../../styles/mixins" as *;
+
 .badge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center;
     text-align: center;
     font-size: 0.8rem;
     color: white;

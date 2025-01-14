@@ -1,15 +1,14 @@
-@import "../../styles/mixins";
+@use "../../styles/mixins" as *;
+@use "../../styles/mixins" as *;
 
 .header {
+    @include flex-between-center;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
     background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 1rem;
 
     &__title,
@@ -49,8 +48,7 @@
         margin: 0 12rem 0 auto;
         width: 100%;
         max-width: 24rem;
-        display: flex;
-        justify-content: center;
+        @include flex-center;
 
         @include respond-to("small") {
             max-width: 28rem;
@@ -64,9 +62,8 @@
     }
 
     &__favorites {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex-center;
+
         gap: 0.5rem;
 
         @include respond-to("small") {
