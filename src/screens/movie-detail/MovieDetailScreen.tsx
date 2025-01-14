@@ -8,7 +8,7 @@ import { Colors } from '@/theme/colors';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { useLoadingStore } from '@/store/loading/loadingStore';
 
-export function MovieDetail(): JSX.Element {
+function MovieDetail(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<Movie | undefined>();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -64,3 +64,4 @@ export function MovieDetail(): JSX.Element {
     />
   );
 }
+export default MovieDetail;

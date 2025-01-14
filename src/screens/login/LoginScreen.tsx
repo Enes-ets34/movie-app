@@ -6,7 +6,7 @@ import LoginView from './LoginView';
 import { login, useAuth } from '@/context/auth/auth.context';
 import { RoutesEnum, useHandleNavigate } from '@/utils/handleNavigate';
 
-export function Login(): JSX.Element {
+function Login(): JSX.Element {
   const { state, dispatch } = useAuth();
   const navigate = useHandleNavigate();
 
@@ -60,3 +60,4 @@ export function Login(): JSX.Element {
     </div>
   );
 }
+export default Login;
